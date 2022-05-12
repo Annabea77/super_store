@@ -1,0 +1,25 @@
+SELECT Segment, Product_ID, Product_Name,
+ COUNT(Quantity) AS total_sold, 
+ ROUND(SUM(Sales),2) AS total_sales, 
+ ROUND(SUM(Profit),2) AS total_profit 
+FROM `super-store-2022.super_store_data.sales`
+
+GROUP BY Product_ID, Product_Name, Segment
+ORDER BY Segment
+
+
+SELECT Product_Id, SUM(Quantity) AS total_quantity, ROUND(SUM(Sales),2) AS product_sales_total, ROUND(SUM(Profit),2) AS product_profit_total
+FROM `super-store-2022.super_store_data.sales`
+GROUP BY Product_ID
+ORDER BY product_sales_total DESC
+
+
+SELECT Segment,ROUND(SUM(Sales),2) AS total_sales, ROUND(SUM(Profit),2) AS total_profit
+FROM `super-store-2022.super_store_data.sales` 
+GROUP By Segment
+
+
+SELECT sale_info.Order_ID, Segment, Sales, Returned  
+FROM `super-store-2022.super_store_data.sales` AS sale_info
+INNER JOIN `super-store-2022.super_store_data.returns` AS return_data
+ON sale_info.Order_ID = return_data.Order_ID
